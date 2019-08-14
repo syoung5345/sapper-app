@@ -3,6 +3,22 @@
 	import { fade, draw, fly } from 'svelte/transition';
 	import { expand } from './custom-transitions.js';
 	import { inner, outer, whole, outline } from './shape.js';
+	import Card from '../components/Card.svelte';
+
+	const items = [
+    {
+      id: 1,
+      title: "Pirate",
+      description: "Argg!!",
+      imageUrl: "https://alligator.io/images/pirate.svg"
+    },
+    {
+      id: 2,
+      title: "Chef",
+      description: "À la soupe!",
+      imageUrl: "https://alligator.io/images/chef.svg"
+    }
+  ];
 </script>
 
 <svelte:head>
@@ -10,6 +26,12 @@
 </svelte:head>
 
 <style>
+	@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+
+	*, *:before, *:after {
+		box-sizing: border-box;
+	}
+
 	svg {
 		width: 60%;
 		height: 60%;
@@ -37,6 +59,109 @@
 	.container {
 		display: grid;
 	}
+
+.wrapper {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.wrapper:focus {
+  outline: 0;
+}
+
+.clash-card {
+  background: white;
+  width: 300px;
+  display: inline-block;
+  margin: auto;
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 30px -12px var(--black);
+  z-index: 9999;
+}
+
+.clash-card:hover {
+	box-shadow: -1px 15px 30px -6px var(--black);
+}
+
+.clash-card__image {
+  position: relative;
+  height: 230px;
+  margin-bottom: 35px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
+}
+
+.clash-card__image img {
+  width: 400px;
+  position: absolute;
+  top: -65px;
+  left: -70px;
+}
+
+.clash-card__level {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: #EC9B3B;
+}
+
+.clash-card__unit-name {
+  font-size: 26px;
+  color: black;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.clash-card__unit-description {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.clash-card__unit-stats {
+  background: #EC9B3B;
+  color: white;
+  font-weight: 700;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+.clash-card__unit-stats .one-third {
+	border-right: 1px solid #BD7C2F;
+  width: 33%;
+  float: left;
+  padding: 20px 15px;
+}
+.clash-card__unit-stats sup {
+  position: absolute;
+  bottom: 4px;
+  font-size: 45%;
+  margin-left: 2px;
+}
+.clash-card__unit-stats .stat {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.clash-card__unit-stats .stat-value {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+}
+.clash-card__unit-stats .no-border {
+  border-right: none;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
 </style>
 
 <div class="container">
@@ -59,6 +184,43 @@
 			</g>
 		</g>
 	</svg>
+
+	<div class="wrapper">
+		<div class="clash-card">
+			<div class="clash-card__image">
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />
+			</div>
+			<div class="clash-card__level">Level 4</div>
+			<div class="clash-card__unit-name">The Barbarian</div>
+			<div class="clash-card__unit-description">
+				The Barbarian is a kilt-clad Scottish warrior with an angry, battle-ready expression, hungry for destruction. He has Killer yellow horseshoe mustache.
+			</div>
+
+			<div class="clash-card__unit-stats clearfix">
+				<div class="one-third">
+				<div class="stat">20<sup>S</sup></div>
+				<div class="stat-value">Training</div>
+				</div>
+
+				<div class="one-third">
+				<div class="stat">16</div>
+				<div class="stat-value">Speed</div>
+				</div>
+
+				<div class="one-third no-border">
+				<div class="stat">150</div>
+				<div class="stat-value">Cost</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<!-- With spread: -->
+	{#each items as item}
+		<Card {...item} />
+	{/each}
 </div>
 
 <!-- <div class="centered" out:fade="{{duration: 200}}">
