@@ -4,12 +4,15 @@
 	--primary: #3D9970;
 	--gray: #676778;
 
-	--border-radius-size: 14px;
-	--barbarian: #EC9B3B;
-	--archer: #EE5487;
-	--giant: #F6901A;
-	--goblin: #82BB30;
-	--wizard: #4FACFF;
+	--font: "Roboto", sans-serif;
+	--fontOrigin: 1rem;     /* 16px */
+	--fontSmall: 0.625em;   /* 10px */
+	--fontMedium: 0.875em;  /* 14px */
+	--fontNormal: 1em;      /* 16px */
+	--fontLarge:  1.375em;  /* 22px */
+	--fontLight: 100;
+	--fontRegular: 400;
+	--speed: 0.65s;
 }
 
 body {

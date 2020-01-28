@@ -1,4 +1,20 @@
 <script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  });
+</script>
+
+<script>
 	import { fade, draw, fly } from 'svelte/transition';
 </script>
 
@@ -58,6 +74,7 @@
 
 <svelte:head>
 	<title>Sapper project template</title>
+	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </svelte:head>
 
 <div class="centered" out:fly="{{y: -20, duration: 800}}">
